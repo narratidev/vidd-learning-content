@@ -1,0 +1,15 @@
+# Local encoding artifacts — outputs are uploaded to GitHub Releases,
+# never committed.
+encoded/
+raw/
+*.mp4
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Editor
+.DS_Store
+.idea/
+.vscode/
