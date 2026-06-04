@@ -1,3 +1,7 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
 """Publish learning videos as a GitHub Release.
 
 Encodes a directory of source MP4s locally with ffmpeg and publishes
@@ -12,11 +16,12 @@ in narrati's learning_curriculum.json.
 
 Usage:
 
-    python publish.py \\
+    uv run publish.py \\
         --source-dir ~/Videos/learning-raw \\
         --tag v2026-06-01
 
 Pre-requisites (all on PATH):
+- uv (https://docs.astral.sh/uv/)
 - ffmpeg, ffprobe
 - gh CLI, authenticated with write access to this repo
 """
