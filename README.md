@@ -23,8 +23,24 @@ URLs.
 
 You'll need:
 
+- [`uv`](https://docs.astral.sh/uv/) on PATH (`brew install uv`).
+  `publish.py` declares its Python version via PEP 723 inline metadata,
+  so `uv` provisions the right interpreter on first run — no venv to
+  create or activate. The script has no third-party dependencies.
 - `ffmpeg` and `ffprobe` on PATH
-- `gh` CLI authenticated with write access to this repo
+- [`gh`](https://cli.github.com/) CLI (`brew install gh`), authenticated
+  with write access to this repo. GitHub Releases use the **REST API**
+  (`api.github.com`), not git's SSH/HTTPS transport — so your existing
+  SSH keys don't apply here; you need an API token. Two options:
+  - **Reuse your existing GitHub PAT** (simplest if you already have
+    one with `repo` scope):
+    ```bash
+    export GH_TOKEN=<your_pat>
+    gh auth status   # should report "Logged in ... using GH_TOKEN"
+    ```
+    `gh` picks `GH_TOKEN` up automatically. No interactive login.
+  - **Or do the interactive login once:** `gh auth login` → GitHub.com
+    → HTTPS → browser. Token is stored in your OS keychain.
 - A directory of raw source MP4s named `<lesson_id>.mp4`, where each
   `lesson_id` matches a `type: "video"` lesson in
   [`learning_curriculum.json`](https://github.com/narratidev/narrati/blob/main/narrati/narrati/api_server/data/learning_curriculum.json)
@@ -32,7 +48,7 @@ You'll need:
 Then:
 
 ```bash
-python publish.py \
+uv run publish.py \
     --source-dir ~/Videos/vidd-learning-raw \
     --tag v2026-06-01
 ```
